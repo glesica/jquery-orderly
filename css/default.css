@@ -1,0 +1,23 @@
+/*
+    default.css
+    Default styles for jquery-orderly plugin.
+
+*/
+
+.jq-orderly-tabbar {
+    
+}
+
+.jq-orderly-visiblebtn {
+    cursor: pointer;
+    float: right;
+}
+
+.jq-orderly-filterbox {
+    border: 1px solid #666;
+    box-shadow: 1px 1px 2px #666;
+    color: #666;
+    padding: 0.25em;
+}
+
+

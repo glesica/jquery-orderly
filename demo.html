@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/default.css" />
+        <link rel="stylesheet" href="css/demo.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.orderly.js"></script>
+        <script type="text/javascript">
+            // Activate the plugin here.
+            $(function() {
+                $('#testlist').orderly({
+                    filterbox: true,
+                    hidefilterbox: true,
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Orderly</h1>
+        <p>A simple jQuery plug-in for sorting HTML lists.</p>
+        <h2>Demo</h2>
+        <p>The list below should be sorted. The list can be filtered 
+        by typing in the text box.</p>
+        <ul id="testlist">
+            <li>Bat</li>
+            <li>Aardvark</li>
+            <li>Zebra</li>
+            <li>Elephant</li>
+            <li>Cat</li>
+            <li>Lemur</li>
+            <li>Dog</li>
+            <li>Snake</li>
+        </ul>
+    </body>
+</html>
