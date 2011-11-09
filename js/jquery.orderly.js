@@ -22,8 +22,8 @@
             filterboxlabel            : 'Type here to filter...',
             filterboxclass            : 'jq-orderly-filterbox',
 
-            ascbuttonsrc              : 'img/plus.png',
-            descbuttonsrc             : 'img/minus.png',
+            ascbuttonsrc              : 'img/up.png',
+            descbuttonsrc             : 'img/down.png',
             showbtnsrc                : 'img/plus.png',
             hidebtnsrc                : 'img/minus.png',
         };
