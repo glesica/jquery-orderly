@@ -22,8 +22,8 @@
             filterboxlabel            : 'Type here to filter...',
             filterboxclass            : 'jq-orderly-filterbox',
 
-            ascbuttonsrc              : 'img/up.png',
-            descbuttonsrc             : 'img/down.png',
+            ascbtnsrc                 : 'img/up.png',
+            descbtnsrc                : 'img/down.png',
             showbtnsrc                : 'img/plus.png',
             hidebtnsrc                : 'img/minus.png',
         };
@@ -48,30 +48,35 @@
             var $box = $('<input>')
                 .attr('type', 'text')
                 .attr('value', settings.filterboxlabel)
-                .addClass(settings.filterboxclass);
-            
-            $box.keyup(function() {
-                filter.call($list, $box.val());
-            });
-            $box.focus(function() {
-                if ($box.val() == settings.filterboxlabel) {
-                    $box.val('');
-                }
-            });
-            $box.blur(function() {
-                if ($box.val() == '') {
-                    $box.val(settings.filterboxlabel);
-                }
-            });
+                .addClass(settings.filterboxclass)
+                .keyup(function() {
+                    filter.call($list, $box.val());
+                })
+                .focus(function() {
+                    if ($box.val() == settings.filterboxlabel) {
+                        $box.val('');
+                    }
+                })
+                .blur(function() {
+                    if ($box.val() == '') {
+                        $box.val(settings.filterboxlabel);
+                    }
+                });
 
             // Create the ascending and descending links
             var $asc = $('<img>')
                 .addClass('jq-orderly-btn')
-                .attr('src', settings.ascbuttonsrc);
+                .attr('src', settings.ascbtnsrc)
+                .click(function() {
+                    sort.call($list, 'ascending');
+                });
 
             var $desc = $('<img>')
                 .addClass('jq-orderly-btn')
-                .attr('src', settings.descbuttonsrc);
+                .attr('src', settings.descbtnsrc)
+                .click(function() {
+                    sort.call($list, 'descending');
+                });
             
             // Add stuff to the tab bar
             $controlbar
@@ -82,17 +87,16 @@
             // Create the show / hide button
             $visiblebtn = $('<img>')
                 .addClass('jq-orderly-btn')
-                .addClass('jq-orderly-visiblebtn');
-            
-            $visiblebtn.click(function() {
-                if ($controlbar.is(':visible')) {
-                    $controlbar.slideUp();
-                    $(this).attr('src', settings.showbtnsrc);
-                } else {
-                    $controlbar.slideDown();
-                    $(this).attr('src', settings.hidebtnsrc);
-                }
-            });
+                .addClass('jq-orderly-visiblebtn')
+                .click(function() {
+                    if ($controlbar.is(':visible')) {
+                        $controlbar.slideUp();
+                        $(this).attr('src', settings.showbtnsrc);
+                    } else {
+                        $controlbar.slideDown();
+                        $(this).attr('src', settings.hidebtnsrc);
+                    }
+                });
             
             // Show the tab bar if necessary
             if (settings.hidecontrolbar) {
