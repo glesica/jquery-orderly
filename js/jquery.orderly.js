@@ -7,7 +7,6 @@
 (function($){
 
     var init = function(options) {
-
         var settings; // For storing default settings
     
         // Configure default settings
@@ -16,119 +15,154 @@
             
             listclass                 : 'jq-orderly',
             
-            tabbar                    : true,
-            hidetabbar                : false,
-            tabbarclass               : 'jq-orderly-tabbar',
+            controlbar                : false,
+            hidecontrolbar            : false,
+            controlbarclass           : 'jq-orderly-controlbar',
             
             filterboxlabel            : 'Type here to filter...',
             filterboxclass            : 'jq-orderly-filterbox',
+
+            ascbtnsrc                 : 'img/up.png',
+            descbtnsrc                : 'img/down.png',
+            showbtnsrc                : 'img/plus.png',
+            hidebtnsrc                : 'img/minus.png',
         };
         // Update default settings with options passed in
         if (options) {
             $.extend(settings, options);
         }
         
-        // Set up the list elements
+        // Set up the list with proper classes, etc.
         var $list = this.
             addClass(settings.listclass);
         
-        // Record the sorting direction
-        $list.data('ordering', settings.ordering);
+        // Call the sort() method to sort the list
+        sort.call($list, settings.ordering);
         
-        // Create a place to store the items
-        $list.data('items', $list.children('li').get());
-        
-        // Sort the list
-        $list.data('items').sort(function(a, b) {
-            var compA = $(a).text().toUpperCase();
-            var compB = $(b).text().toUpperCase();
-            return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-        });
-        
-        if (settings.ordering == 'descending') {
-            $list.data('items').reverse();
-        }
-        
-        // Rebuild the sorted list
-        $.each($list.data('items'), function(idx, itm) {
-            $list.append(itm);
-        });
-        
-        // Set up the tab bar
-        if (settings.tabbar) {
-            var $tabbar = $('<div>')
-                .addClass(settings.tabbarclass);
+        // Set up the controll bar
+        if (settings.controlbar) {
+            var $controlbar = $('<div>')
+                .addClass(settings.controlbarclass);
         
             // Create the filter box
             var $box = $('<input>')
                 .attr('type', 'text')
                 .attr('value', settings.filterboxlabel)
-                .addClass(settings.filterboxclass);
-            
-            $box.keyup(function() {
-                filter.call($list, $box.val());
-            });
-            $box.focus(function() {
-                if ($box.val() == settings.filterboxlabel) {
-                    $box.val('');
-                }
-            });
-            $box.blur(function() {
-                if ($box.val() == '') {
-                    $box.val(settings.filterboxlabel);
-                }
-            });
+                .addClass(settings.filterboxclass)
+                .keyup(function() {
+                    filter.call($list, $box.val());
+                })
+                .focus(function() {
+                    if ($box.val() == settings.filterboxlabel) {
+                        $box.val('');
+                    }
+                })
+                .blur(function() {
+                    if ($box.val() == '') {
+                        $box.val(settings.filterboxlabel);
+                    }
+                });
+
+            // Create the ascending and descending links
+            var $asc = $('<img>')
+                .addClass('jq-orderly-btn')
+                .attr('src', settings.ascbtnsrc)
+                .click(function() {
+                    sort.call($list, 'ascending');
+                });
+
+            var $desc = $('<img>')
+                .addClass('jq-orderly-btn')
+                .attr('src', settings.descbtnsrc)
+                .click(function() {
+                    sort.call($list, 'descending');
+                });
             
             // Add stuff to the tab bar
-            $tabbar
+            $controlbar
                 .append($box)
+                .append($asc)
+                .append($desc);
             
             // Create the show / hide button
             $visiblebtn = $('<img>')
-                .addClass('jq-orderly-visiblebtn');
-            
-            $visiblebtn.click(function() {
-                if ($tabbar.is(':visible')) {
-                    $tabbar.slideUp();
-                    $(this).attr('src', 'img/plus.png');
-                } else {
-                    $tabbar.slideDown();
-                    $(this).attr('src', 'img/minus.png');
-                }
-            });
+                .addClass('jq-orderly-btn')
+                .addClass('jq-orderly-visiblebtn')
+                .click(function() {
+                    if ($controlbar.is(':visible')) {
+                        $controlbar.slideUp();
+                        $(this).attr('src', settings.showbtnsrc);
+                    } else {
+                        $controlbar.slideDown();
+                        $(this).attr('src', settings.hidebtnsrc);
+                    }
+                });
             
             // Show the tab bar if necessary
-            if (settings.hidetabbar) {
-                $tabbar.hide();
-                $visiblebtn.attr('src', 'img/plus.png');
+            if (settings.hidecontrolbar) {
+                $controlbar.hide();
+                $visiblebtn.attr('src', settings.showbtnsrc);
             } else {
-                $tabbar.show();
-                $visiblebtn.attr('src', 'img/minus.png');
+                $controlbar.show();
+                $visiblebtn.attr('src', settings.hidebtnsrc);
             }
             
             $list
-                .before($tabbar)
+                .before($controlbar)
                 .before($visiblebtn);
         }
 
-        return this;
+        return $list;
+    };
+    
+    var sort = function(dir) {
+        var $list = this;
+        
+        // Record the sorting direction
+        $list.data('ordering', dir);
+        
+        // Create a place to store the items
+        var items = $list.children('li').get();
+        
+        // Sort the list
+        items.sort(function(a, b) {
+            var compA = $(a).text().toUpperCase();
+            var compB = $(b).text().toUpperCase();
+            return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+        });
+        
+        // Flip the list if we want it to be descending
+        if (dir == 'descending') {
+            items.reverse();
+        }
+        
+        // Rebuild the sorted list
+        $.each(items, function(id, item) {
+            $list.append(item);
+        });
+        
+        return $list;
     };
     
     var filter = function(str) {
+        $list = this;
         // Filter the list based on the search string `str`
         var search_string = str.toLowerCase();
-        this.children('li').each(function() {
+        $list.children('li').each(function() {
             if ($(this).text().toLowerCase().indexOf(search_string) == -1) {
                 $(this).hide();
             } else {
                 $(this).show();
             }
         });
+        
+        return $list;
     };
     
     // Define available methods
     var methods = {
         init            : init,
+        sort            : sort,
         filter          : filter,
     };
     

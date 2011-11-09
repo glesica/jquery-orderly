@@ -4,20 +4,15 @@
 
 */
 
-.jq-orderly-tabbar {
-    
+.jq-orderly-btn {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 0 0 0.25em;
+    vertical-align: middle;
 }
 
 .jq-orderly-visiblebtn {
-    cursor: pointer;
     float: right;
-}
-
-.jq-orderly-filterbox {
-    border: 1px solid #666;
-    box-shadow: 1px 1px 2px #666;
-    color: #666;
-    padding: 0.25em;
 }
 
 
