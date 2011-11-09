@@ -4,12 +4,17 @@
 
 */
 
-.jq-orderly-tabbar {
+.jq-orderly-controlbar {
     
 }
 
-.jq-orderly-visiblebtn {
+.jq-orderly-btn {
     cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.jq-orderly-visiblebtn {
     float: right;
 }
 
