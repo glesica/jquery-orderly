@@ -118,10 +118,10 @@
         $list.data('ordering', dir);
         
         // Create a place to store the items
-        $list.data('items', $list.children('li').get());
+        var items = $list.children('li').get();
         
         // Sort the list
-        $list.data('items').sort(function(a, b) {
+        items.sort(function(a, b) {
             var compA = $(a).text().toUpperCase();
             var compB = $(b).text().toUpperCase();
             return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
@@ -129,11 +129,11 @@
         
         // Flip the list if we want it to be descending
         if (dir == 'descending') {
-            $list.data('items').reverse();
+            items.reverse();
         }
         
         // Rebuild the sorted list
-        $.each($list.data('items'), function(id, item) {
+        $.each(items, function(id, item) {
             $list.append(item);
         });
         
@@ -158,6 +158,7 @@
     // Define available methods
     var methods = {
         init            : init,
+        sort            : sort,
         filter          : filter,
     };
     
