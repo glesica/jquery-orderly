@@ -18,8 +18,8 @@
             listclass                 : 'jq-orderly',
             
             // The controlbar lets the user search and re-order the list
-            controlbar                : false,
-            showcontrolbar            : true,
+            controlbar                : false, // Create a controll bar or not
+            showcontrolbar            : true, // Show control bar initially
             controlbarclass           : 'jq-orderly-controlbar',
             
             // Filter box lets the user search the list by typing
