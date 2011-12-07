@@ -11,17 +11,22 @@
     
         // Configure default settings
         var settings = {
+            // Initial sort direction
             ordering                  : 'ascending',
             
+            // One or more classes to add to each targeted list
             listclass                 : 'jq-orderly',
             
+            // The controlbar lets the user search and re-order the list
             controlbar                : false,
-            hidecontrolbar            : false,
+            showcontrolbar            : true,
             controlbarclass           : 'jq-orderly-controlbar',
             
+            // Filter box lets the user search the list by typing
             filterboxlabel            : 'Type here to filter...',
             filterboxclass            : 'jq-orderly-filterbox',
 
+            // Button image file paths
             ascbtnsrc                 : 'img/up.png',
             descbtnsrc                : 'img/down.png',
             showbtnsrc                : 'img/plus.png',
@@ -99,12 +104,12 @@
                 });
             
             // Show the tab bar if necessary
-            if (settings.hidecontrolbar) {
-                $controlbar.hide();
-                $visiblebtn.attr('src', settings.showbtnsrc);
-            } else {
+            if (settings.showcontrolbar) {
                 $controlbar.show();
                 $visiblebtn.attr('src', settings.hidebtnsrc);
+            } else {
+                $controlbar.hide();
+                $visiblebtn.attr('src', settings.showbtnsrc);
             }
             
             $list
