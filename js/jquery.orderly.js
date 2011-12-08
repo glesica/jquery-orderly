@@ -10,7 +10,7 @@
         var settings; // For storing default settings
     
         // Configure default settings
-        var settings = {
+        settings = {
             // Initial sort direction
             ordering                  : 'ascending',
             
@@ -35,7 +35,7 @@
             ascbtnsrc                 : 'img/up.png',
             descbtnsrc                : 'img/down.png',
             showbtnsrc                : 'img/plus.png',
-            hidebtnsrc                : 'img/minus.png',
+            hidebtnsrc                : 'img/minus.png'
         };
         // Update default settings with options passed in
         if (options) {
@@ -64,7 +64,7 @@
     // Filter a list: `str` is a search string. List items that do not 
     // include the search string (case-insensitive) will be hidden.
     var filterList = function(str) {
-        $list = this;
+        var $list = this;
         // Filter the list based on the search string `str`
         var search_string = str.toLowerCase();
         $list.children('li').each(function() {
@@ -76,12 +76,12 @@
         });
         
         return $list;
-    }
+    };
     
     // Filter a table: `str` is a search string to look for. Rows that do 
     // not contain the search string (case-insensitive) will be hidden.
     var filterTable = function(str) {
-        $tbody = this.children('tbody');
+        var $tbody = this.children('tbody');
         
         var search_string = str.toLowerCase();
         $tbody.children('tr').each(function() {
@@ -100,7 +100,7 @@
         });
         
         return this;
-    }
+    };
     
     // Sort a list: `direction` is either 'ascending' or 'descending'.
     var sortList = function(direction) {
@@ -139,7 +139,7 @@
         this.data('orderly.sort.column', column);
         this.data('orderly.sort.direction', direction);
     
-        $tbody = this.children('tbody');
+        var $tbody = this.children('tbody');
         
         // Get raw DOM objects for the rows
         var items = $tbody.children('tr').get();
@@ -168,7 +168,7 @@
         }
         
         return this;
-    }
+    };
     
     // Initial setup for a list
     var setupList = function(settings) {
@@ -199,7 +199,7 @@
                     }
                 })
                 .blur(function() {
-                    if ($box.val() == '') {
+                    if ($box.val() === '') {
                         $box.val(settings.filterboxlabel);
                     }
                 });
@@ -226,7 +226,7 @@
                 .append($desc);
             
             // Create the show / hide button
-            $visiblebtn = $('<img>')
+            var $visiblebtn = $('<img>')
                 .addClass('jq-orderly-btn')
                 .addClass('jq-orderly-visiblebtn')
                 .click(function() {
@@ -254,7 +254,7 @@
         }
         
         return $list;
-    }
+    };
     
     // Initial setup for a table
     var setupTable = function(settings) {
@@ -279,15 +279,16 @@
         $table.find('th').each(function(id) {
             var $header = $(this);
             $header.click(function() {
+                var dir;
                 if ($table.data('orderly.sort.column') == id) {
                     var prev = $table.data('orderly.sort.direction');
                     if (prev == 'ascending') {
-                        var dir = 'descending';
+                        dir = 'descending';
                     } else {
-                        var dir = 'ascending';
+                        dir = 'ascending';
                     }
                 } else {
-                    var dir = 'ascending';
+                    dir = 'ascending';
                 }
                 sortTable.call($table, dir, id);
             });
@@ -295,7 +296,7 @@
         .addClass('orderly-header');
         
         return $table;
-    }
+    };
     
     // Define available methods
     var methods = {
