@@ -20,6 +20,7 @@
             // Options for sorting tables
             tableclass                : 'jq-orderly',
             sortcolumn                : 0, // Initial column to use for sorting
+            sortcallback              : null, // Called in table's context
             
             // The controlbar lets the user search and re-order the list
             controlbar                : false, // Create a controll bar or not
@@ -160,6 +161,12 @@
             $tbody.append(item);
         });
         
+        // Call the post-sort callback, if present
+        var callback = this.data('orderly.sort.callback');
+        if (callback) {
+            callback.call(this);
+        }
+        
         return this;
     }
     
@@ -258,6 +265,11 @@
             .data('orderly.type', 'table')
             .data('orderly.sort.column', settings.sortcolumn)
             .data('orderly.sort.direction', settings.ordering);
+        
+        // If we got a sort callback function to apply after sorting, save it.
+        if (settings.sortcallback) {
+            $table.data('orderly.sort.callback', settings.sortcallback);
+        }
         
         // Sort the actual table
         sortTable.call($table, settings.ordering, settings.sortcolumn);

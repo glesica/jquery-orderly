@@ -14,7 +14,11 @@
                 
                 $('#testlist2').orderly();
                 
-                $('#testtable').orderly();
+                $('#testtable').orderly({
+                    sortcallback: function() { 
+                        console.debug($(this));
+                    }
+                });
             });
         </script>
     </head>
