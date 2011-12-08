@@ -1,0 +1,12 @@
+/*
+Styles for jQuery-Orderly demo.
+*/
+
+table th {
+    border-bottom: 2px solid #222;
+    padding: 3px 6px;
+}
+
+table td {
+    padding: 3px 6px;
+}

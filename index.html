@@ -10,8 +10,11 @@
             $(function() {
                 $('#testlist').orderly({
                     controlbar: true,
-                    hidecontrolbar: true,
                 });
+                
+                $('#testlist2').orderly();
+                
+                $('#testtable').orderly();
             });
         </script>
     </head>
@@ -31,5 +34,49 @@
             <li>Dog</li>
             <li>Snake</li>
         </ul>
+        <p>Here is another demo.</p>
+        <ul id="testlist2">
+            <li>Vanilla</li>
+            <li>Chocolate</li>
+            <li>Butter Pecan</li>
+            <li>Strawberry</li>
+            <li>Cherry</li>
+            <li>Chocolate Chip</li>
+            <li>Mint Chocolate Chip</li>
+            <li>French Vanilla</li>
+            <li>Rocky Road</li>
+        </ul>
+        <p>Orderly can also sort tables.</p>
+        <table id="testtable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Favorite Ice Cream</th>
+                    <th>Favorite Animal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Billy</td>
+                    <td>Vanilla</td>
+                    <td>Elephant</td>
+                </tr>
+                <tr>
+                    <td>Sally</td>
+                    <td>Chocolate Chip</td>
+                    <td>Zebra</td>
+                </tr>
+                <tr>
+                    <td>Andy</td>
+                    <td>Rocky Road</td>
+                    <td>Cat</td>
+                </tr>
+                <tr>
+                    <td>Susie</td>
+                    <td>Cherry</td>
+                    <td>Lemur</td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>
