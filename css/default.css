@@ -4,18 +4,18 @@
 
 */
 
-.jq-orderly-btn {
+.orderly-button {
     cursor: pointer;
     display: inline-block;
     margin: 0 0 0 0.25em;
     vertical-align: middle;
 }
 
-.jq-orderly-visiblebtn {
+.orderly-visible {
     float: right;
 }
 
-.orderly-header {
+.orderly th {
     cursor: pointer;
 }
 
