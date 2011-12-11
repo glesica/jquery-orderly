@@ -9,13 +9,13 @@
             // Activate the plugin here.
             $(function() {
                 $('#testlist').orderly({
-                    controlbar: true,
+                    toolbar: true,
                 });
                 
                 $('#testlist2').orderly();
                 
                 $('#testtable').orderly({
-                    sortcallback: function() { 
+                    callback: function() { 
                         console.debug($(this));
                     }
                 });
