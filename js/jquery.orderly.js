@@ -6,6 +6,7 @@
       direction: 'ascending',
       listclass: 'orderly',
       tableclass: 'orderly',
+      buttonclass: 'orderly-button',
       sortcolumn: 0,
       sortcallback: null,
       toolbar: false,
@@ -44,7 +45,7 @@
           _this = this;
         if (this.options.toolbar) {
           $toolbar = $('<div>').addClass(this.options.toolbarclass);
-          $filter = $('<input>').attr('type', 'text').attr('value', this.options.filterlabel).addClass(this.options.filterclass).keyup(function() {
+          $filter = $("<input \n    type=\"text\" \n    value=\"" + this.options.filterlabel + "\"\n    class=\"" + this.options.filterclass + "\"\n/>").keyup(function() {
             return _this.filterList($filter.val());
           }).focus(function() {
             if ($filter.val() === _this.options.filterlabel) {
@@ -53,32 +54,32 @@
           }).blur(function() {
             if ($filter.val() === '') return $filter.val(this.options.filterlabel);
           });
-          $asc = $('<img>').addClass('orderly-button').attr('src', this.options.ascbtnsrc).click(function() {
+          $asc = $("<button class=\"" + this.options.buttonclass + "\">\n    <img src=\"" + this.options.ascbtnsrc + "\" />\n</button>").click(function() {
             return _this.sortList('ascending');
           });
-          $desc = $('<img>').addClass('orderly-button').attr('src', this.options.descbtnsrc).click(function() {
+          $desc = $("<button class=\"" + this.options.buttonclass + "\">\n    <img src=\"" + this.options.descbtnsrc + "\" />\n</button>").click(function() {
             return _this.sortList('descending');
           });
-          $toolbar.append($filter).append($asc).append($desc);
-          $toggle = $('<img>').addClass('orderly-button').addClass('orderly-visible').click(function() {
+          $toolbar.append($filter).append(' ').append($asc).append(' ').append($desc);
+          $toggle = $("<button class=\"" + this.options.buttonclass + " orderly-visible\">\n    <img src=\"\" />\n</button>").click(function() {
             if ($toolbar.is(':visible')) {
               $toolbar.slideUp();
-              return $toggle.attr('src', _this.options.showbtnsrc);
+              return $toggle.children('img').attr('src', _this.options.showbtnsrc);
             } else {
               $toolbar.slideDown();
-              return $toggle.attr('src', _this.options.hidebtnsrc);
+              return $toggle.children('img').attr('src', _this.options.hidebtnsrc);
             }
           });
           if (this.options.showtoolbar) {
             $toolbar.show();
-            $toggle.attr('src', this.options.hidebtnsrc);
+            $toggle.children('img').attr('src', this.options.hidebtnsrc);
           } else {
             $toolbar.hide();
-            $toggle.attr('src', this.options.showbtnsrc);
+            $toggle.children('img').attr('src', this.options.showbtnsrc);
           }
         }
         this.sortList(this.options.direction);
-        return $(this.element).before($toolbar).before($toggle).addClass(this.options.listclass);
+        return $(this.element).before($toggle).before($toolbar).addClass(this.options.listclass);
       };
 
       Plugin.prototype.sortList = function(direction) {

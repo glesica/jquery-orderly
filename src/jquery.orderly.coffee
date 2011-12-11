@@ -17,6 +17,8 @@
 
         listclass   : 'orderly' # Class(es) to add to sorted lists
         tableclass  : 'orderly' # Class(es) to add to sorted tables
+        
+        buttonclass : 'orderly-button' # Class(es) to apply to buttons
 
         sortcolumn  : 0 # Column to sort on for sorted tables, 0-indexed
         sortcallback: null # Function to call after sorting, passes $(table)
@@ -64,10 +66,13 @@
                     .addClass(@options.toolbarclass)
                 
                 # Filter box
-                $filter = $('<input>')
-                    .attr('type', 'text')
-                    .attr('value', @options.filterlabel)
-                    .addClass(@options.filterclass)
+                $filter = $("""
+                    <input 
+                        type="text" 
+                        value="#{@options.filterlabel}"
+                        class="#{@options.filterclass}"
+                    />
+                """)
                     .keyup () =>
                         @filterList($filter.val())
                     .focus () =>
@@ -78,51 +83,59 @@
                             $filter.val(@options.filterlabel)
             
                 # Ascending and descending buttons
-                $asc = $('<img>')
-                    .addClass('orderly-button')
-                    .attr('src', @options.ascbtnsrc)
+                $asc = $("""
+                    <button class="#{@options.buttonclass}">
+                        <img src="#{@options.ascbtnsrc}" />
+                    </button>
+                """)
                     .click () =>
                         @sortList('ascending')
                 
-                $desc = $('<img>')
-                    .addClass('orderly-button')
-                    .attr('src', @options.descbtnsrc)
+                $desc = $("""
+                    <button class="#{@options.buttonclass}">
+                        <img src="#{@options.descbtnsrc}" />
+                    </button>
+                """)
                     .click () =>
                         @sortList('descending')
                 
                 # Add everything to the actual toolbar
                 $toolbar
                     .append($filter)
+                    .append(' ')
                     .append($asc)
+                    .append(' ')
                     .append($desc)
             
                 # Show / hide button
-                $toggle = $('<img>')
-                    .addClass('orderly-button')
-                    .addClass('orderly-visible')
+                $toggle = $("""
+                    <button class="#{@options.buttonclass} orderly-visible">
+                        <img src="" />
+                    </button>
+                """)
                     .click () =>
                         if $toolbar.is(':visible')
                             $toolbar.slideUp()
-                            $toggle.attr('src', @options.showbtnsrc)
+                            $toggle.children('img').attr('src', @options.showbtnsrc)
                         else
                             $toolbar.slideDown()
-                            $toggle.attr('src', @options.hidebtnsrc)
+                            $toggle.children('img').attr('src', @options.hidebtnsrc)
                             
                 # Show the tab bar if necessary
                 if @options.showtoolbar
                     $toolbar.show()
-                    $toggle.attr('src', @options.hidebtnsrc)
+                    $toggle.children('img').attr('src', @options.hidebtnsrc)
                 else
                     $toolbar.hide()
-                    $toggle.attr('src', @options.showbtnsrc)
+                    $toggle.children('img').attr('src', @options.showbtnsrc)
             
             # Sort the list
             @sortList(@options.direction)
             
             # Return the list
             $(@element)
-                .before($toolbar)
                 .before($toggle)
+                .before($toolbar)
                 .addClass(@options.listclass)
                 
         sortList: (direction) ->
