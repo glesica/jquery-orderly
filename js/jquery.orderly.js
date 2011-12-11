@@ -69,7 +69,7 @@
               return $toggle.attr('src', _this.options.hidebtnsrc);
             }
           });
-          if (this.showcontrolbar) {
+          if (this.options.showtoolbar) {
             $toolbar.show();
             $toggle.attr('src', this.options.hidebtnsrc);
           } else {

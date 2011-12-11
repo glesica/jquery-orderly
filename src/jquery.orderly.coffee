@@ -109,7 +109,7 @@
                             $toggle.attr('src', @options.hidebtnsrc)
                             
                 # Show the tab bar if necessary
-                if @.showcontrolbar
+                if @options.showtoolbar
                     $toolbar.show()
                     $toggle.attr('src', @options.hidebtnsrc)
                 else
