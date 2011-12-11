@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
     <head>
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
         <link rel="stylesheet" href="css/default.css" />
         <link rel="stylesheet" href="css/demo.css" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
@@ -8,8 +9,9 @@
         <script type="text/javascript">
             // Activate the plugin here.
             $(function() {
-                $('#testlist').orderly({
+                $('#testlist1').orderly({
                     toolbar: true,
+                    buttonclass: 'orderly-button btn'
                 });
                 
                 $('#testlist2').orderly();
@@ -23,12 +25,24 @@
         </script>
     </head>
     <body>
+        <a href="http://github.com/glesica/jquery-orderly"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/30f550e0d38ceb6ef5b81500c64d970b7fb0f028/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub"></a>
+        <img src="img/logo.png" id="logo" />
         <h1>Orderly</h1>
-        <p>A simple jQuery plug-in for sorting HTML lists.</p>
+        <p>A simple jQuery plug-in for sorting HTML lists and tables. The 
+        source can be found on <a href="http://github.com/glesica/jquery-orderly">Github</a>.</p>
         <h2>Demo</h2>
+        <h3>Interactive List</h3>
         <p>The list below should be sorted. The list can be filtered 
-        by typing in the text box.</p>
-        <ul id="testlist">
+        by typing in the text box. It can be re-sorted using the 
+        buttons. The button bar can also be toggled on or off using the 
+        button to the far right. This style works well for information 
+        that the user needs to interact with or for very long lists.
+        The options necessary to produce this list are 
+        below:</p>
+        <pre>$('#testlist1').orderly({
+    toolbar: true,
+});</pre>
+        <ul id="testlist1">
             <li>Bat</li>
             <li>Aardvark</li>
             <li>Zebra</li>
@@ -38,7 +52,12 @@
             <li>Dog</li>
             <li>Snake</li>
         </ul>
-        <p>Here is another demo.</p>
+        <h3>Non-Interactive List</h3>
+        <p>This demo removes the controls from the previous list. This style 
+        would be useful applied to all lists in a document, for example, so 
+        that items can be placed in arbitrary order during creation but 
+        displayed in alphabetical order to the user. Code is below:</p>
+        <pre>$('#testlist2').orderly();</pre>
         <ul id="testlist2">
             <li>Vanilla</li>
             <li>Chocolate</li>
@@ -50,7 +69,19 @@
             <li>French Vanilla</li>
             <li>Rocky Road</li>
         </ul>
-        <p>Orderly can also sort tables.</p>
+        <h3>Sortable Table</h3>
+        <p>Orderly can also sort tables. The sort column can be specified 
+        in advance but the user can also change the sort column by clicking 
+        on the column header. For this to work, tables must use the 
+        <code>thead</code> and <code>tbody</code> tags properly. A callback 
+        function can be specified that will be called whenever the table 
+        is sorted. Check out the debug console to see for yourself. Code 
+        is below.</p>
+        <pre>$('#testtable').orderly({
+    callback: function() { 
+        console.debug($(this));
+    }
+});</pre>
         <table id="testtable">
             <thead>
                 <tr>
@@ -82,5 +113,33 @@
                 </tr>
             </tbody>
         </table>
+        <h2>Options</h2>
+        <p>Orderly accepts a number of options. They are described in the 
+        source and below.</p>
+        <pre>direction   : 'ascending' # Initial sort direction
+
+listclass   : 'orderly' # Class(es) to add to sorted lists
+tableclass  : 'orderly' # Class(es) to add to sorted tables
+
+buttonclass : 'orderly-button' # Class(es) to apply to buttons
+
+sortcolumn  : 0 # Column to sort on for sorted tables, 0-indexed
+sortcallback: null # Function to call after sorting, passes $(table)
+
+toolbar     : false # Create a toolbar for sorted lists
+showtoolbar : true # Show the toolbar (when created) by default
+toolbarclass: 'orderly-toolbar' # Class(es) to add to toolbar
+
+filterlabel : 'Type here to filter...' # Label for filter textbox
+filterclass : 'orderly-filter' # Class(es) to add to filter textbox
+
+ascbtnsrc   : 'img/up.png', # Image src for ascend sort button
+descbtnsrc  : 'img/down.png', # Image src for descend sort button
+showbtnsrc  : 'img/plus.png', # Image src for show toolbar button
+hidebtnsrc  : 'img/minus.png' # Image src for hide toolbar button</pre>
+        <h2>License</h2>
+        <p>Copyright (c) 2011 George Lesica. Orderly may be used under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>.
+        <h2>Credits</h2>
+        <p>Page background courtesy of John Burks via <a href="http://subtlepatterns.com/">http://subtlepatterns.com</a> and is licensed <a href="http://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>.
     </body>
 </html>

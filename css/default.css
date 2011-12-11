@@ -4,11 +4,12 @@
 
 */
 
-.orderly-button {
+.orderly-button img {
     cursor: pointer;
     display: inline-block;
-    margin: 0 0 0 0.25em;
-    vertical-align: middle;
+    margin: 0;
+    max-height: 1.0em;
+    vertical-align: bottom;
 }
 
 .orderly-visible {

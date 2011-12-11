@@ -1,12 +1,19 @@
 /*
-Styles for jQuery-Orderly demo.
+    Styles for jQuery-Orderly demo.
 */
 
-table th {
-    border-bottom: 2px solid #222;
-    padding: 3px 6px;
+html {
+    background: url('../img/bg.png');
+    padding: 0;
 }
 
-table td {
-    padding: 3px 6px;
+body {
+    background: #fff;
+    box-shadow: 0px 0px 10px #000;
+    margin: 3.0em auto;
+    max-width: 800px;
+    padding: 3.0em;
 }
+
+
+
