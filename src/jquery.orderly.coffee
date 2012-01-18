@@ -78,7 +78,7 @@
                     .focus () =>
                         if $filter.val() is @options.filterlabel
                             $filter.val('')
-                    .blur () ->
+                    .blur () =>
                         if $filter.val() is ''
                             $filter.val(@options.filterlabel)
             

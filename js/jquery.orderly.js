@@ -52,7 +52,9 @@
               return $filter.val('');
             }
           }).blur(function() {
-            if ($filter.val() === '') return $filter.val(this.options.filterlabel);
+            if ($filter.val() === '') {
+              return $filter.val(_this.options.filterlabel);
+            }
           });
           $asc = $("<button class=\"" + this.options.buttonclass + "\">\n    <img src=\"" + this.options.ascbtnsrc + "\" />\n</button>").click(function() {
             return _this.sortList('ascending');
